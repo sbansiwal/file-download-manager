@@ -12,5 +12,4 @@ func GetDownloadedFiles(c *gin.Context)  {
 	for id, _ := range fileDB {
 		c.JSON(http.StatusOK, id)
 	}
-
 }

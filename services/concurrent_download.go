@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -9,7 +10,7 @@ import (
 
 func Download(URL string) error {
 	resp, err := http.Get(URL)
-
+	fmt.Println(err)
 	if err != nil {
 		return err
 	}
