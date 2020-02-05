@@ -56,16 +56,10 @@ func NewDownload(newDownloadFile downloads.NewDownloadFiles, DownloadID string) 
 	} else{
 
 		startTime := time.Now()
-		MappedUrl, isSuccess := ConcurrentDownload(newDownloadFile.URLs)
+		MappedUrl := ConcurrentDownload(newDownloadFile.URLs)
 		endTime := time.Now()
 
 		var status string
-
-		if isSuccess == true {
-			status = "Successful"
-		} else{
-			status = "Unsuccessful"
-		}
 
 		DownloadedFile := downloads.DownloadedFiles{
 			Id			:    DownloadID,

@@ -16,9 +16,9 @@ func CheckDownloadStatus(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+	} else {
+		c.JSON(http.StatusOK, downloadedFile)
 	}
-
-	c.JSON(http.StatusOK, downloadedFile)
 }
 
 func NewDownload(c *gin.Context){
