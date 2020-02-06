@@ -7,7 +7,6 @@ import (
 
 func TestSerialDownload(t *testing.T) {
 
-
 	type args struct {
 		urls []string
 	}
@@ -21,7 +20,7 @@ func TestSerialDownload(t *testing.T) {
 			name : "All files downloaded successfully",
 			args : args{
 				[]string{
-					"https://upload.wikimedia.org/wikipedia/commons/3/3f/Fron_big.jpg",
+					"https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg",
 					"https://upload.wikimedia.org/wikipedia/commons/d/dd/Big_%26_Small_Pumkins.JPG",
 				},
 			},
@@ -43,7 +42,7 @@ func TestSerialDownload(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			_, result := SerialDownload(tt.args.urls)
 			if !reflect.DeepEqual(result, tt.isSuccess) {
-				t.Errorf("SerialDownload() got success = %v, want success = %v", result, tt.isSuccess)
+				t.Errorf("SerialDownload() got = %v, want = %v", result, tt.isSuccess)
 			}
 		})
 	}

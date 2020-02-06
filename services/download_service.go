@@ -24,18 +24,13 @@ func NewDownload(newDownloadFile downloads.NewDownloadFiles, DownloadID string) 
 	if newDownloadFile.Type == "serial" {
 
 		startTime := time.Now()
-		MappedUrl, isSuccess := SerialDownload(newDownloadFile.URLs)
+		MappedUrl, _ := SerialDownload(newDownloadFile.URLs)
 		endTime := time.Now()
 
 		DownloadID = xid.New().String()
 
 		var status string
-
-		if isSuccess == true {
-			status = "Successful"
-		} else {
-			status = "Unsuccessful"
-		}
+		status = ""
 
 		DownloadedFile := downloads.DownloadedFiles{
 			Id			:    string(DownloadID),
@@ -56,7 +51,7 @@ func NewDownload(newDownloadFile downloads.NewDownloadFiles, DownloadID string) 
 	} else{
 
 		startTime := time.Now()
-		MappedUrl := ConcurrentDownload(newDownloadFile.URLs)
+		MappedUrl, _:= ConcurrentDownload(newDownloadFile.URLs)
 		endTime := time.Now()
 
 		var status string

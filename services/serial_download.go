@@ -7,10 +7,11 @@ func SerialDownload(urls []string) (*map[string]string, bool) {
 	isSuccess := true
 
 	for _, URL := range urls {
-		err := Download(URL)
+		err := DownloadErr(URL)
 
 		if err == true {
 			MappedUrls[URL] = "Unsuccessful"
+			isSuccess = false
 		} else {
 			MappedUrls[URL] = "Successful"
 		}

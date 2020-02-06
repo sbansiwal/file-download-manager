@@ -1,18 +1,19 @@
 package services
 
-func ConcurrentDownload(urls []string) *map[string]string {
+func ConcurrentDownload(urls []string) (*map[string]string, bool){
 
 	 MappedURLs := make(map[string]string)
-
+	isSuccess := true
 	 urlCount := 0
 
 	 for _, URL := range urls {
 	 	urlCount++
 	 	go func(URL string) {
-			err := Download(URL)
+			err := DownloadErr(URL)
 
 			if err == true {
 				MappedURLs[URL] = "Unsuccessful"
+				isSuccess = false
 			} else {
 				MappedURLs[URL] = "Successful"
 			}
@@ -21,8 +22,8 @@ func ConcurrentDownload(urls []string) *map[string]string {
 	 }
 
 	if urlCount == len(urls) {
-		return &MappedURLs
+		return &MappedURLs, isSuccess
 	} else {
-		return nil
+		return nil, false
 	}
 }
