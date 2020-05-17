@@ -1,29 +1,29 @@
-on:
+on: 
   pull_request:
     types: ['opened', 'closed']
 
-name: Test Find Issue Key
-
 jobs:
-  test-find-issue-key:
-    name: Find Issue Key
+  hello_world_job:
     runs-on: ubuntu-latest
+    name: A job to say hello
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-
-    - name: Login
-      uses: atlassian/gajira-login@master
-      env:
-        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-
-    - name: Find Issue Key
-      id: find
-      uses: atlassian/gajira-find-issue-key@master
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
       with:
-        from: commits
-
-    - name: Find issue info
-      run: echo "Issue ${{ steps.find.outputs.issue }} was found"
+        node-version: '10.x'      # This step prints an output (time) from the previous step's action.
+    - run: npm install 
+    - name: Hello world action step
+      id: hello
+      uses: sunil-bansiwal/hello-world-javascript-action@master
+      with:
+        who-to-greet: 'Sunil Bansiwal'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PERSONAL_TOKEN_VALUE: ${{ secrets.PERSONAL_TOKEN_VALUE }}
+        PERSONAL_TOKEN_USER: 'sunil-bansiwal'
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        JIRA_DOMAIN: 'sunilbansiwal.atlassian.net'
+        JIRA_USER: 'sunilssb786@gmail.com'
+        JIRA_PROJECT_NAME: 'TJ'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
