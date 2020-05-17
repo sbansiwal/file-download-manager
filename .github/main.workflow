@@ -1,5 +1,5 @@
 workflow "Branch notification" {
-  on = "commits"
+  on = "pull_request"
   resolves = ["Add Comment"]
 }
 
